@@ -1,10 +1,11 @@
+import os
 game_play = [[0 for i in range(3)] for i in range(3)]
 X_wins = 0
 O_wins = 0
 draw = 0
 turn_num = 0
 def print_play_game():
-    print()
+    os.system('cls')
     for i in range(3):
         print("-------------")
         print("| {} | {} | {} |".format(game_play[i][0],game_play[i][1],game_play[i][2]))
@@ -35,13 +36,17 @@ def get_player_choice(player_turn):
 
     player_choice = input("Player with {} enter your number:".format(player_turn))
     if not player_choice.isdigit():
+        print_play_game()
         print("Please enter valid number (1-9)")
     elif int(player_choice) >9 or int(player_choice) <=0:
+        print_play_game()
         print("Please enter valid number (1-9)")
     elif not is_valid_choice(player_choice):
+        print_play_game()
         print("this place is occupied, try again")
     else:
         return int(player_choice)
+    
     return get_player_choice(player_turn)
 # add the player choice to location in the matrix game
 def set_player_choice(player_choice, player_turn):
@@ -85,7 +90,7 @@ def is_winner():
     elif row != "":
         print("row")
         return row
-   
+    
     #  main diagonal check
     topLeft = game_play[0][0]
     center = game_play[1][1]
